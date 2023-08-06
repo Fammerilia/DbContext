@@ -3,24 +3,20 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApplication2;
 
 #nullable disable
 
-namespace WebApplication2.Migrations
+namespace DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230726134914_InitialCreate")]
-    partial class InitialCreate
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.8")
+                .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -38,6 +34,11 @@ namespace WebApplication2.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(5);
 
+                    b.Property<string>("EmpMiddlename")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
                     b.Property<string>("EmpName")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -45,6 +46,11 @@ namespace WebApplication2.Migrations
 
                     b.Property<int>("EmpSex")
                         .HasColumnType("int");
+
+                    b.Property<string>("EmpSurname")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("OrderCount")
                         .ValueGeneratedOnAdd()
@@ -369,8 +375,6 @@ namespace WebApplication2.Migrations
 
                     b.HasKey("OrderId");
 
-                    b.HasIndex("ClientId");
-
                     b.ToTable("Orders");
                 });
 
@@ -458,17 +462,6 @@ namespace WebApplication2.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Order", b =>
-                {
-                    b.HasOne("Client", "Client")
-                        .WithMany("Orders")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Client");
-                });
-
             modelBuilder.Entity("Client", b =>
                 {
                     b.Navigation("ClientAddresses");
@@ -476,8 +469,6 @@ namespace WebApplication2.Migrations
                     b.Navigation("ClientContacts");
 
                     b.Navigation("ClientEmails");
-
-                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

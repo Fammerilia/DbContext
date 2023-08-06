@@ -3,7 +3,7 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using DAL.Interfaces;
-using DLL.DTOS;
+using BLL.DTOS.Order;
 
 namespace DAL.Services
 {

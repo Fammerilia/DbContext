@@ -5,11 +5,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using WebApplication2.Utility;
-using DLL.DTOS;
-using DLL.DTOS.Search;
+using API.Utility;
+using BLL.DTOS.Search;
 using DAL.Interfaces;
 using DAL.Services;
+using BLL.DTOS.Addresses;
+using BLL.DTOS.Contacts;
+using BLL.DTOS.Client;
+using BLL.DTOS.Emails;
+using BLL.DTOS.Order;
 
 var builder = WebApplication.CreateBuilder(args);
     var config = builder.Configuration;
@@ -20,11 +24,10 @@ var builder = WebApplication.CreateBuilder(args);
         .Build();
 
     var connectionString = configuration.GetConnectionString("EmployeeDbConnection");
-    builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddAutoMapper(cfg =>
 {
-    cfg.CreateMap<Client, ClientDTO>()
-        .ForAllMembers(opt => opt.ExplicitExpansion());
+    cfg.CreateMap<Client, ClientDTO>();
+       // .ForAllMembers(opt => opt.ExplicitExpansion());
     cfg.CreateMap<Client, SearchResultDTO>();
     cfg.CreateMap<ClientAddresses, ClientAddressesDTO>();
     cfg.CreateMap<ClientContact, ClientContactDTO>(); 

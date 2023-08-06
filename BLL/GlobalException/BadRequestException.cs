@@ -1,4 +1,4 @@
-﻿namespace WebApplication2.GlobalException
+﻿namespace API.GlobalException
 {
     public class BadRequestException : Exception
     {

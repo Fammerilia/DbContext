@@ -1,4 +1,4 @@
-﻿using DLL.DTOS;
+﻿using BLL.DTOS.Addresses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DAL.Interfaces

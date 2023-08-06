@@ -1,4 +1,4 @@
-﻿using DLL.DTOS;
+﻿using BLL.DTOS.Emails;
 
 namespace DAL.Interfaces
 {

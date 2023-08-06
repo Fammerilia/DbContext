@@ -1,4 +1,4 @@
-﻿namespace DLL.DTOS
+﻿namespace BLL.DTOS.Contacts
 {
     public class ClientContactCreateDTO
     {

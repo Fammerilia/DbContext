@@ -1,4 +1,4 @@
-﻿using DLL.DTOS;
+﻿using BLL.DTOS.Order;
 
 namespace DAL.Interfaces
 {

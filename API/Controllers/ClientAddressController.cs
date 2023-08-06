@@ -1,14 +1,15 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.GlobalException;
+using API.GlobalException;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Security;
 using AutoMapper;
-using WebApplication2;
-using WebApplication2.Utility;
+using API;
+using API.Utility;
 using DAL.Interfaces;
-using DLL.DTOS;
+using BLL.DTOS.Addresses;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ClientAddressController : ControllerBase

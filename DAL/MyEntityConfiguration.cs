@@ -22,10 +22,6 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                .HasMaxLength(50)
                .IsRequired();
 
-        builder.HasOne(o => o.Client)
-               .WithMany(c => c.Orders)
-               .HasForeignKey(o => o.ClientId)
-               .OnDelete(DeleteBehavior.Cascade);
     }
 }
 
@@ -49,20 +45,11 @@ public class ClientConfiguration : IEntityTypeConfiguration<Client>
         builder.Property(c => c.DiscountType)
                .HasDefaultValue(5);
 
-        builder.HasMany(c => c.ClientContacts)
-               .WithOne(cc => cc.Client)
-               .HasForeignKey(cc => cc.ClientId)
-               .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasMany(c => c.ClientAddresses)
-               .WithOne(ca => ca.Client)
-               .HasForeignKey(ca => ca.ClientId)
-               .OnDelete(DeleteBehavior.Cascade);
-
-        builder.HasMany(c => c.ClientEmails)
-               .WithOne(ce => ce.Client)
-               .HasForeignKey(ce => ce.ClientId)
-               .OnDelete(DeleteBehavior.Cascade);
+        builder.Property(c => c.EmpMiddlename)
+            .HasMaxLength(20);
+        builder.Property(c => c.EmpSurname)
+           .IsRequired()
+           .HasMaxLength(20);
     }
 }
 

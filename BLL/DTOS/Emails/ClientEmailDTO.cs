@@ -1,4 +1,4 @@
-﻿namespace DLL.DTOS
+﻿namespace BLL.DTOS.Emails
 {
     public class ClientEmailDTO
     {

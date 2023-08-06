@@ -1,13 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.GlobalException;
+using API.GlobalException;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Security;
 using AutoMapper;
-using WebApplication2;
-using WebApplication2.Utility;
-using DLL.DTOS;
+using API;
+using API.Utility;
+using BLL.DTOS.Contacts;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class ClientsController : ControllerBase
@@ -37,6 +38,8 @@ public class ClientsController : ControllerBase
     [HttpGet]
     public IActionResult SearchClients(
         [FromQuery] string? empName,
+        [FromQuery] string? empSurname,
+        [FromQuery] string? empMiddlename,
         [FromQuery] string? contact,
         [FromQuery] string? address,
         [FromQuery] string? email,
@@ -49,6 +52,8 @@ public class ClientsController : ControllerBase
     {
         var searchResults = _clientService.SearchClients(
             empName,
+            empSurname,
+            empMiddlename,
             contact,
             address,
             email,
@@ -67,7 +72,7 @@ public class ClientsController : ControllerBase
     }
 
 
-    [HttpPost("delete")]
+    [HttpDelete("delete")]
     public async Task <IActionResult> DeleteClient(int clientId)
     {
         var client = new Client { ClientId = clientId };

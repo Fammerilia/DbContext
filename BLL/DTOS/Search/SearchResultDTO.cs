@@ -1,6 +1,10 @@
-﻿using DLL.DTOS;
+﻿using BLL.DTOS.Addresses;
+using BLL.DTOS.Client;
+using BLL.DTOS.Contacts;
+using BLL.DTOS.Emails;
+using BLL.DTOS.Order;
 
-namespace DLL.DTOS.Search
+namespace BLL.DTOS.Search
 {
     public class SearchResultDTO
     {

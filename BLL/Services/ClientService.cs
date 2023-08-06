@@ -1,8 +1,15 @@
 ﻿using AutoMapper;
-using DLL.DTOS;
-using DLL.DTOS.Search;
+using BLL.DTOS.Search;
 using Microsoft.EntityFrameworkCore;
 using DAL.Services;
+using BLL.DTOS.Addresses;
+using BLL.DTOS.Contacts;
+using BLL.DTOS.Client;
+using BLL.DTOS.Emails;
+using BLL.DTOS.Order;
+using DAL;
+using System.Linq;
+
 public class ClientService : IClientService
 {
     private readonly IMapper _mapper;
@@ -18,6 +25,8 @@ public class ClientService : IClientService
         var client = new Client
         {
             EmpName = clientCreateDTO.EmpName,
+            EmpSurname = clientCreateDTO.EmpSurname,
+            EmpMiddlename = clientCreateDTO.EmpMiddlename,
             EmpSex = clientCreateDTO.EmpSex,
         };
 
@@ -59,6 +68,8 @@ public class ClientService : IClientService
 
     public IEnumerable<SearchResultDTO> SearchClients(
         string? empName,
+        string? empSurname,
+        string? empMiddlename,
         string? contact,
         string? address,
         string? email,
@@ -80,7 +91,9 @@ public class ClientService : IClientService
                 (string.IsNullOrEmpty(email) || c.ClientEmails.Any(ce => ce.EmpEmail.Contains(email))) &&
                 (string.IsNullOrEmpty(orderIdPartial) || c.Orders.Any(o => o.OrderId.ToString().Contains(orderIdPartial))) &&
                 (string.IsNullOrEmpty(orderDescription) || c.Orders.Any(o => o.OrderDescription.Contains(orderDescription))) &&
-                (string.IsNullOrEmpty(empName) || c.EmpName.Contains(empName)) 
+                (string.IsNullOrEmpty(empName) || c.EmpName.Contains(empName)) &&
+                (string.IsNullOrEmpty(empSurname) || c.EmpSurname.Contains(empSurname)) &&
+                (string.IsNullOrEmpty(empMiddlename) || c.EmpMiddlename.Contains(empMiddlename)) 
                 && (!empSex.HasValue || c.EmpSex == empSex.Value)
                 && (!orderCount.HasValue || c.OrderCount == orderCount.Value)
                 && (!status.HasValue || c.Status == status.Value)

@@ -1,9 +1,9 @@
-﻿using WebApplication2.GlobalException;
+﻿using API.GlobalException;
 using System.Net;
 using System.Text.Json;
 using KeyNotFoundException = System.Collections.Generic.KeyNotFoundException;
 
-namespace WebApplication2.Utility
+namespace API.Utility
 {
     public class GlobalErrorHandlingMiddleware
     {

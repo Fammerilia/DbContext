@@ -1,8 +1,8 @@
 ﻿using DAL.Interfaces;
 using AutoMapper;
-using DLL.DTOS;
 using Microsoft.EntityFrameworkCore;
-using WebApplication2.GlobalException;
+using API.GlobalException;
+using BLL.DTOS.Emails;
 
 namespace DAL.Services
 {

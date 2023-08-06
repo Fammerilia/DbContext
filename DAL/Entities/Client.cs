@@ -7,6 +7,10 @@ public class Client
 {
     public int ClientId { get; set; }
     public string EmpName { get; set; }
+
+    public string EmpSurname { get; set; }
+
+    public string EmpMiddlename { get; set; }
     public int EmpSex { get; set; }
     public int OrderCount { get; set; }
     public int Status { get; set; }
@@ -14,7 +18,8 @@ public class Client
     public List<ClientContact> ClientContacts { get; set; }
     public List<ClientAddresses> ClientAddresses { get; set; }
     public List<ClientEmail> ClientEmails { get; set; }
-    public List<Order> Orders { get; set; }
+    public ICollection<Order> Orders { get; set; }
+
 
 
 }

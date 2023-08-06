@@ -1,4 +1,5 @@
-﻿using DLL.DTOS;
+﻿using BLL.DTOS.Contacts;
+using DAL;
 
 namespace DAL.Interfaces
 {

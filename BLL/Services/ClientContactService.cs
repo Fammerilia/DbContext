@@ -4,9 +4,9 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using DAL.Interfaces;
-using DLL.DTOS;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.GlobalException;
+using API.GlobalException;
+using BLL.DTOS.Contacts;
 
 namespace DAL.Services
 {

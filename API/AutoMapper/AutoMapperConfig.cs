@@ -1,6 +1,12 @@
 ﻿using AutoMapper;
-using DLL.DTOS;
-using DLL.DTOS.Search;
+using BLL.DTOS.Search;
+using API;
+using BLL.DTOS.Addresses;
+using BLL.DTOS.Contacts;
+using BLL.DTOS.Client;
+using BLL.DTOS.Emails;
+using BLL.DTOS.Order;
+
 public static class AutoMapperConfig
 {
     public static IMapper Initialize()

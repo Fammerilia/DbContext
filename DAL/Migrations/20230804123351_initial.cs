@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace webapplication2.Migrations
+namespace DAL.Migrations
 {
     /// <inheritdoc />
     public partial class initial : Migration
@@ -48,6 +48,42 @@ namespace webapplication2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Clients",
+                columns: table => new
+                {
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmpName = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    EmpSurname = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    EmpMiddlename = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    EmpSex = table.Column<int>(type: "int", nullable: false),
+                    OrderCount = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    DiscountType = table.Column<int>(type: "int", nullable: false, defaultValue: 5)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Clients", x => x.ClientId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderDescription = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    OrderAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    OrderStatus = table.Column<int>(type: "int", maxLength: 50, nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.OrderId);
                 });
 
             migrationBuilder.CreateTable(
@@ -156,6 +192,69 @@ namespace webapplication2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ClientAddresses",
+                columns: table => new
+                {
+                    ClientAddressId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClientId = table.Column<int>(type: "int", nullable: false),
+                    EmpAddress = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Address_type = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientAddresses", x => x.ClientAddressId);
+                    table.ForeignKey(
+                        name: "FK_ClientAddresses_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClientContacts",
+                columns: table => new
+                {
+                    ClientContactId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmpContact = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Contact_type = table.Column<int>(type: "int", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientContacts", x => x.ClientContactId);
+                    table.ForeignKey(
+                        name: "FK_ClientContacts_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ClientEmails",
+                columns: table => new
+                {
+                    ClientEmailId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmpEmail = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Email_type = table.Column<int>(type: "int", nullable: false),
+                    ClientId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientEmails", x => x.ClientEmailId);
+                    table.ForeignKey(
+                        name: "FK_ClientEmails_Clients_ClientId",
+                        column: x => x.ClientId,
+                        principalTable: "Clients",
+                        principalColumn: "ClientId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -194,6 +293,21 @@ namespace webapplication2.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientAddresses_ClientId",
+                table: "ClientAddresses",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientContacts_ClientId",
+                table: "ClientContacts",
+                column: "ClientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClientEmails_ClientId",
+                table: "ClientEmails",
+                column: "ClientId");
         }
 
         /// <inheritdoc />
@@ -215,10 +329,25 @@ namespace webapplication2.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "ClientAddresses");
+
+            migrationBuilder.DropTable(
+                name: "ClientContacts");
+
+            migrationBuilder.DropTable(
+                name: "ClientEmails");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Clients");
         }
     }
 }

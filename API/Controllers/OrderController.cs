@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication2.GlobalException;
+using API.GlobalException;
 using System.ComponentModel.DataAnnotations;
 using System.Net.Security;
 using AutoMapper;
-using WebApplication2;
-using WebApplication2.Utility;
-using DLL.DTOS;
+using API;
+using API.Utility;
 using DAL.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using DAL;
+using BLL.DTOS.Order;
 
+
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class OrderController : ControllerBase
